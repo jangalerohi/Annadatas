@@ -1,0 +1,67 @@
+{% include 'navbar.html' %}
+<div class="container mt-5">
+
+    <h2 class="mb-4">👤 My Dashboard</h2>
+
+    <div class="row g-4">
+
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3">
+                <h4>Welcome, {{ user.username }} 👋</h4>
+                <p class="text-muted">{{ user.email }}</p>
+
+                <a href="/logout/" class="btn btn-danger w-100 mt-3">Logout</a>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="col-md-8">
+
+            <!-- Orders Section -->
+            <div class="card shadow-sm p-3 mb-4">
+                <h4>📦 Recent Orders</h4>
+
+                {% if orders %}
+                    <table class="table mt-3">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Track</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for o in orders %}
+                            <tr>
+                                <td>#{{ o.id }}</td>
+                                <td>₹{{ o.total_amount }}</td>
+                                <td>{{ o.status }}</td>
+                                <td>
+                                    <a href="/track/{{ o.id }}/" class="btn btn-sm btn-success">
+                                        Track
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    <p class="text-muted">You have no orders yet.</p>
+                {% endif %}
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex gap-3">
+                <a href="/products/" class="btn btn-primary">🛍 Continue Shopping</a>
+                <a href="/my-orders/" class="btn btn-outline-dark">📄 View All Orders</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<br><br>
+{% include 'footer.html' %}

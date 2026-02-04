@@ -1,0 +1,164 @@
+
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+     
+
+  <!-- Hero Section -->
+<section class="hero">
+    {% for slider in slider_data %}
+    <img src="{{ slider.slider_image.url }}" alt="{{ slider.slider_title }}">
+
+    <div class="hero-content">
+        <h1>{{ slider.slider_title }}</h1>
+        <p>{{ slider.slider_description }}</p>
+        <a href="{{ slider.slider_btn_link }}" class="btn btn-primary">
+            {{ slider.slider_btn_title}}
+        </a>
+    </div>
+    {% endfor %}
+</section>
+
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+
+        <h2 class="section-title">आमची वैशिष्ट्ये</h2>
+
+        <div class="features-grid">
+
+            {% for feature in features_data %}
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="{{ feature.feature_icon }}"></i>
+                </div>
+                <h3>{{ feature.feature_title }}</h3>
+                <p>{{ feature.feature_description }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Products Preview -->
+<section class="products">
+    <div class="container">
+        <h2 class="section-title">आमची लोकप्रिय कडधान्ये</h2>
+
+        <div class="product-grid">
+
+            {% for products in products_data %}
+            <!-- Product Card -->
+            <div class="product-card" 
+                data-id="{{ products.id }}" 
+                data-name="{{ products.product_name }}" 
+                data-price="{{ products.product_price }}" 
+                data-image="{{ products.product_image.url }}">
+
+                <img src="{{ products.product_image.url }}" alt="{{ products.product_name }}" class="product-img">
+
+                <div class="product-info">
+                    <h3 class="product-title">{{ products.product_name }}</h3>
+                    <p class="product-weight">
+                        <i class="fa fa-balance-scale"></i> {{ products.product_weight }}
+                    </p>
+                    <p class="product-price">
+                        <i class="fa fa-inr"></i> {{ products.product_price }}
+                    </p>
+                    <button class="btn btn-primary add-to-cart">
+                        <i class="fa fa-shopping-cart"></i> {{ products.product_add_to_cart }}
+                        
+                    </button>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="/products" class="btn btn-secondary">
+            सर्व उत्पादने पहा<i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+<br><br>
+
+<!-- About Section -->
+<!-- About Section -->
+<section class="about">
+    <div class="container">
+
+        <div class="about-content">
+
+            <div class="about-text">
+                <h2>{{ about_data.about_title }}</h2>
+                <p>{{ about_data.about_description }}</p>
+
+                <a href="{{ about_data.about_btn_link }}" class="btn btn-outline">
+                    {{ about_data.about_btn_title }}
+                </a>
+            </div>
+
+            <div class="about-image">
+                <img src="{{ about_data.about_image.url }}" alt="{{ about_data.about_title }}">
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+ <!-- Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        <h2 class="section-title">आमचे ग्राहक काय म्हणतात</h2>
+
+        <div class="testimonial-grid">
+
+            {% for t in Testimonial_data %}
+            <div class="testimonial-card">
+
+                <!-- ⭐ Dynamic Star Rating -->
+                <div class="testimonial-rating">
+                    {% for _ in ""|center:t.Testimonials_star %}
+                        <i class="fas fa-star"></i>
+                    {% endfor %}
+                </div>
+
+                <!-- ✨ Description -->
+                <p>"{{ t.Testimonials_description }}"</p>
+
+                <!-- 👤 Name + Address -->
+                <h4>{{ t.Testimonials_name_address }}</h4>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+    {% include 'footer.html' %}
+    </body>
+</html>

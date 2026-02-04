@@ -1,0 +1,27 @@
+{% include 'navbar.html' %}
+<div class="container mt-5" style="max-width: 450px;">
+
+    <h2 class="text-center mb-4">✍️ Create Account</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label class="fw-bold">Full Name</label>
+        <input type="text" name="username" class="form-control mb-3" placeholder="Your Name" required>
+
+        <label class="fw-bold">Email</label>
+        <input type="email" name="email" class="form-control mb-3" placeholder="email@example.com" required>
+
+        <label class="fw-bold">Password</label>
+        <input type="password" name="password" class="form-control mb-3" placeholder="Create password" required>
+
+        <button class="btn btn-success w-100 py-2">Create Account</button>
+    </form>
+
+    <p class="text-center mt-3">
+        Already have an account?
+        <a href="/login/">Login</a>
+    </p>
+</div>
+<br><br>
+{% include 'footer.html' %}

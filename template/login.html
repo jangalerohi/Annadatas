@@ -1,0 +1,24 @@
+{% include 'navbar.html' %}
+<div class="container mt-5" style="max-width: 450px;">
+
+    <h2 class="text-center mb-4">🔑 Login</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label class="fw-bold">Username</label>
+        <input type="text" name="username" class="form-control mb-3" placeholder="Enter username" required>
+
+        <label class="fw-bold">Password</label>
+        <input type="password" name="password" class="form-control mb-3" placeholder="Enter password" required>
+
+        <button class="btn btn-primary w-100 py-2">Login</button>
+    </form>
+
+    <p class="text-center mt-3">
+        Don't have an account?
+        <a href="/signup/">Sign Up</a>
+    </p>
+</div>
+<br><br>
+{% include 'footer.html' %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Success{% endblock %}
+
+{% block content %}
+<div class="container my-5 text-center">
+    <div class="card border-success">
+        <div class="card-header bg-success text-white">
+            <h3><i class="fas fa-check-circle"></i> Order Successful!</h3>
+        </div>
+        <div class="card-body">
+            <h4>Thank you for your order!</h4>
+            
+            {% if order %}
+            <div class="alert alert-info mt-3">
+                <h5>Order Details</h5>
+                <p><strong>Order ID:</strong> #{{ order.id }}</p>
+                <p><strong>Name:</strong> {{ order.name }}</p>
+                <p><strong>Total:</strong> ₹{{ order.total_amount }}</p>
+            </div>
+            {% endif %}
+            
+            <div class="mt-4">
+                <a href="{% url 'my_orders' %}" class="btn btn-primary">My Orders</a>
+                <a href="{% url 'products' %}" class="btn btn-success">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

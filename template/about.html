@@ -1,0 +1,279 @@
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Hero Section */
+.hero {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Dark overlay for better text visibility */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* Container */
+.hero .container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Heading */
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #f1f1f1;
+}
+
+/* Paragraph */
+.hero p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #f1f1f1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+
+    <!-- About Hero -->
+    <section class="hero" style="background-image:url('/static/img/OurJourney.jpg');">
+        <div class="container">
+            <h1>आमचा प्रवास : मातीपासून माणसापर्यंत</h1>
+            <p>
+                2026 सालापासून गावात राबणाऱ्या शेतकऱ्यांना
+                थेट शहरातील घराघरांपर्यंत जोडण्याचे काम आम्ही करीत आहोत
+            </p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>आम्ही कोण आहोत?</h2>
+                    <p>
+                        Annadata.com ची कल्पना एका साध्या अनुभवातून जन्माला आली.
+                        शहरात राहणाऱ्या लोकांना शुद्ध, रसायनमुक्त आणि चवदार डाळी हव्या होत्या,
+                        पण दुसरीकडे गावातील शेतकरी आपली पिकलेली डाळ
+                        कमी दरात व्यापाऱ्यांना विकायला मजबूर होते.
+                    </p>
+                    <p>
+                        शेतकरी दिवसरात्र राबतो,
+                        तरीही त्याच्या मेहनतीचा योग्य मोबदला मिळत नव्हता.
+                        हीच गोष्ट आम्हाला अस्वस्थ करत होती.
+                        म्हणून आम्ही ठरवलं – 
+                        शेतकरी आणि ग्राहक यांच्यातला मधला दलाल काढून टाकायचा.
+                    </p>
+                    <p>
+                        2026 मध्ये शेतीवर प्रेम करणारे
+                        आणि तंत्रज्ञानाची जाण असलेले Rohit Jangale आले
+                        आणि Annadata.com ची सुरुवात झाली.
+                        आज आम्ही शेतकऱ्यांकडून थेट माल घेऊन
+                        ग्राहकांपर्यंत पोहोचवतो,
+                        ज्यामुळे शेतकऱ्याला चांगला दर मिळतो
+                        आणि ग्राहकाला दर्जेदार माल मिळतो.
+                    </p>
+                </div>
+
+                <div class="about-image">
+                    <img src="/static/img/about.png" alt="आमची टीम">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="features" style="background-color: var(--off-white);">
+        <div class="container">
+            <h2 class="section-title">आमचं ध्येय आणि स्वप्न</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>आमचं ध्येय</h3>
+                    <p>
+                        गावात कष्ट करणाऱ्या शेतकऱ्याला
+                        त्याच्या मालाचा योग्य आणि न्याय्य दर मिळावा,
+                        तसेच शहरातील कुटुंबांपर्यंत
+                        शुद्ध, सेंद्रिय आणि थेट शेतातून आलेल्या डाळी पोहोचाव्यात,
+                        हेच आमचं मुख्य ध्येय आहे.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>आमचं स्वप्न</h3>
+                    <p>
+                        भारतातील प्रत्येक गावातला शेतकरी
+                        आत्मसन्मानाने आपला माल विकू शकेल
+                        आणि प्रत्येक ग्राहक निश्चिंतपणे
+                        दर्जेदार अन्न खाऊ शकेल,
+                        असा विश्वासार्ह दुवा बनण्याचं आमचं स्वप्न आहे.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>आमची मूल्ये</h3>
+                    <p>
+                        प्रामाणिकपणा, पारदर्शक व्यवहार,
+                        शेतकऱ्यांशी न्याय,
+                        उत्तम दर्जा
+                        आणि पर्यावरणाची काळजी —
+                        हीच Annadata ची खरी ओळख आहे.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Farmer Stories -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">शेतकऱ्यांच्या मनोगत</h2>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>
+                        "Annadata मुळे मला माझ्या डाळीला
+                        गावातल्या व्यापाऱ्यांपेक्षा सुमारे ३० टक्के जास्त दर मिळतो.
+                        आता मी माझ्या लेकरांचं शिक्षण नीट करू शकतो,
+                        हेच माझ्यासाठी सगळ्यात मोठं समाधान आहे."
+                    </p>
+                    <h4>राजू पाटील, महाराष्ट्र</h4>
+                    <p><small>२०२१ पासून जोडलेले शेतकरी</small></p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>
+                        "पेरणीच्या वेळेला Annadata कडून आगाऊ पैसे मिळतात,
+                        त्यामुळे आम्हाला कर्ज काढावं लागत नाही.
+                        त्यांनी दिलेल्या आधारामुळे
+                        आमचं जीवन खूप सावरलं आहे."
+                    </p>
+                    <h4>सुनीता देवी, उत्तर प्रदेश</h4>
+                    <p><small>२०२२ पासून जोडलेल्या शेतकरी</small></p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>
+                        "Annadata ने आम्हाला सेंद्रिय शेती शिकवली.
+                        आज आमची जमीन जिवंत झाली आहे,
+                        पीक चांगलं येतं
+                        आणि उत्पन्नही वाढलं आहे."
+                    </p>
+                    <h4>मोहन सिंग, राजस्थान</h4>
+                    <p><small>2026 पासून जोडलेले शेतकरी</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">आमचा प्रवास आकड्यांमध्ये</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3 style="color: var(--primary-green); font-size: 2.5rem;">500+</h3>
+                    <p>आनंदी आणि सक्षम शेतकरी</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 style="color: var(--primary-green); font-size: 2.5rem;">50,000+</h3>
+                    <p>समाधानी ग्राहक</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 style="color: var(--primary-green); font-size: 2.5rem;">25+</h3>
+                    <p>देशभरातील जोडलेली गावे</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 style="color: var(--primary-green); font-size: 2.5rem;">100%</h3>
+                    <p>पूर्णपणे सेंद्रिय व रसायनमुक्त</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+    {% include 'footer.html' %}
+</body>
+</html>

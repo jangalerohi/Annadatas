@@ -1,0 +1,252 @@
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+        <style>
+        /* Hero Section */
+.hero {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Dark overlay for better text visibility */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* Container */
+.hero .container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Heading */
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #f1f1f1;
+}
+
+/* Paragraph */
+.hero p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #f1f1f1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <!-- Contact Hero -->
+    <section class="hero" style="background-image:url('/static/img/Mca.jpg');">
+        <div class="container">
+            <h1>आमच्याशी संपर्क साधा</h1>
+            <p>
+                आमच्या उत्पादनांबाबत किंवा सेवांबाबत
+                तुमचे कोणतेही प्रश्न असतील तर आम्ही मदतीसाठी सदैव तयार आहोत
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="features" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="contact-info">
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>आमचं कार्यालय</h3>
+                    <p>
+                        १२३ फार्म स्ट्रीट<br>
+                        ऑरगॅनिक सिटी, महाराष्ट्र<br>
+                        भारत – ४११००१
+                    </p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>फोन नंबर</h3>
+                    <p>ग्राहक सेवा : +91 9370995318</p>
+                    <p>शेतकरी सेवा : +91 9370995318</p>
+                    <p>वेळ : सोमवार ते शनिवार, सकाळी ९ ते सायंकाळी ६</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>ई-मेल पत्ता</h3>
+                    <p>ग्राहकांसाठी : hello@annadata.com</p>
+                    <p>शेतकऱ्यांसाठी : farmers@annadata.com</p>
+                    <p>व्यवसाय भागीदारी : partners@annadata.com</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="about" style="background-color: var(--off-white);">
+        <div class="container">
+            <div class="form-container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">आम्हाला संदेश पाठवा</h2>
+
+                <form id="contactForm">
+
+                    <div class="form-group">
+                        <label for="name">पूर्ण नाव *</label>
+                        <input type="text" id="name" class="form-control" placeholder="तुमचं पूर्ण नाव लिहा" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">ई-मेल पत्ता *</label>
+                        <input type="email" id="email" class="form-control" placeholder="तुमचा ई-मेल पत्ता लिहा" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">मोबाईल नंबर</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="तुमचा मोबाईल नंबर लिहा">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">विषय *</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="">विषय निवडा</option>
+                            <option value="order">ऑर्डर संदर्भातील प्रश्न</option>
+                            <option value="product">उत्पादनाची माहिती</option>
+                            <option value="farmer">शेतकरी नोंदणी</option>
+                            <option value="partner">व्यवसाय भागीदारी</option>
+                            <option value="other">इतर</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">संदेश *</label>
+                        <textarea id="message" class="form-control" rows="5" placeholder="तुमचा संदेश येथे लिहा..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                        <i class="fas fa-paper-plane"></i> संदेश पाठवा
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">वारंवार विचारले जाणारे प्रश्न</h2>
+
+            <div class="testimonial-grid">
+
+                <div class="testimonial-card">
+                    <h3>ऑर्डर कशी करावी?</h3>
+                    <p>
+                        आमची उत्पादने पाहा, हवी ती निवडा
+                        आणि चेकआउट करा.
+                        आम्ही सर्व प्रमुख पेमेंट पद्धती स्वीकारतो.
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <h3>डिलिव्हरी किती दिवसांत मिळते?</h3>
+                    <p>
+                        संपूर्ण भारतात ३ ते ५ कामकाजाच्या दिवसांत
+                        डिलिव्हरी केली जाते.
+                        महानगरांमध्ये एक्सप्रेस डिलिव्हरी उपलब्ध आहे.
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <h3>उत्पादने खरंच सेंद्रिय आहेत का?</h3>
+                    <p>
+                        होय! आमच्या सर्व डाळी
+                        १००% सेंद्रिय असून
+                        थेट प्रमाणित गावातील शेतकऱ्यांकडून घेतल्या जातात.
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <h3>गुणवत्ता कशी तपासली जाते?</h3>
+                    <p>
+                        शेत तपासणीपासून ते पॅकिंग
+                        आणि डिलिव्हरीपर्यंत
+                        अनेक टप्प्यांवर गुणवत्ता तपासली जाते.
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <h3>उत्पादन परत करता येईल का?</h3>
+                    <p>
+                        होय, न उघडलेली व खराब न झालेली उत्पादने
+                        ७ दिवसांच्या आत परत करता येतात.
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <h3>शेतकऱ्यांना कसा फायदा होतो?</h3>
+                    <p>
+                        शेतकऱ्यांना स्थानिक बाजारपेठेपेक्षा
+                        ३०–४०% जास्त दर मिळतो
+                        तसेच पेरणीसाठी आगाऊ पैसेही दिले जातात.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+    {% include 'footer.html' %}
+</body>
+</html>

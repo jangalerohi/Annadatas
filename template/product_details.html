@@ -1,0 +1,69 @@
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ product.title }}</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <div class="row g-5">
+
+        <!-- IMAGE COLUMN -->
+        <div class="col-lg-5 col-md-6 col-12 text-center">
+            <img src="{{ product.image.url }}" 
+                 class="img-fluid rounded shadow"
+                 style="max-height: 420px; object-fit: cover;">
+        </div>
+
+        <!-- DETAILS COLUMN -->
+        <div class="col-lg-7 col-md-6 col-12">
+
+            <h1 class="fw-bold">{{ product.title }}</h1>
+            <p class="text-muted mb-1">Weight: {{ product.weight }}</p>
+
+            <!-- PRICE -->
+            <h3 class="text-success fw-bold mb-3">₹{{ product.price }}</h3>
+
+            <!-- Description -->
+            <p class="mb-3">
+                {{ product.description|default:"Premium quality product sourced directly from trusted farmers." }}
+            </p>
+
+            <!-- Highlights -->
+            <ul class="mb-4">
+                <li>उच्च प्रथिनयुक्त व पौष्टिक</li>
+                <li>100% शेतातून थेट</li>
+                <li>रसायनमुक्त आणि शुद्ध</li>
+                <li>हाताने निवडलेले दाणे</li>
+            </ul>
+
+            <!-- Quantity Selector -->
+            <div class="d-flex align-items-center mb-4">
+                <button class="btn btn-outline-secondary px-3">-</button>
+                <span class="px-3 fs-5">1</span>
+                <button class="btn btn-outline-secondary px-3">+</button>
+            </div>
+
+            <!-- Buttons -->
+            <a href="{% url 'add_to_cart' product.slug %}" class="btn btn-primary add-to-cart">
+    Add to Cart
+</a
+            <a href="/products" class="btn btn-outline-dark w-100">← Back to Products</a>
+
+        </div>
+
+    </div>
+
+</div>
+<br><br>
+{% include 'footer.html' %}
+
+</body>
+</html>

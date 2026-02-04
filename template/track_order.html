@@ -1,0 +1,46 @@
+{% include 'navbar.html' %}
+
+<div class="container mt-5">
+    <h2>Track Your Order</h2>
+    <p>Order ID: {{ order.id }}</p>
+
+    <div class="tracking-step mt-4">
+        <div id="placed" class="step">Order Placed</div>
+        <div id="packed" class="step">Packed</div>
+        <div id="shipped" class="step">Out for Delivery</div>
+        <div id="delivered" class="step">Delivered</div>
+    </div>
+</div>
+
+<style>
+.step {
+    padding: 12px;
+    border-left: 5px solid #ccc;
+    margin-bottom: 10px;
+}
+.step.active {
+    border-left: 5px solid green;
+    color: green;
+    font-weight: 600;
+}
+</style>
+
+<script>
+function refreshStatus() {
+    fetch(`/track-status/{{ order.id }}/`)
+    .then(res => res.json())
+    .then(data => {
+        let status = data.status;
+
+        document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+
+        document.getElementById(status).classList.add("active");
+    });
+}
+
+setInterval(refreshStatus, 3000);
+refreshStatus();
+</script>
+<br><br>
+
+{% include 'footer.html' %}

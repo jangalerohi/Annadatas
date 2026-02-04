@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Checkout</h2>
+    
+    <!-- Debug Info -->
+    <div class="alert alert-info">
+        <h5>Debug Information:</h5>
+        <p>Razorpay Key: <strong>{{ razorpay_key|default:"NOT SET" }}</strong></p>
+        <p>Razorpay Order ID: <strong>{{ razorpay_order_id|default:"NOT SET" }}</strong></p>
+        <p>Total: <strong>₹{{ total }}</strong></p>
+        <p>Items in Cart: <strong>{{ items.count }}</strong></p>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Shipping Details</h5>
+                </div>
+                <div class="card-body">
+                    <form id="checkout-form">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control" id="name" 
+                                   value="{{ user.get_full_name|default:user.username }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label>Shipping Address</label>
+                            <textarea class="form-control" id="address" rows="3" required></textarea>
+                        </div>
+                        
+                        <!-- Simple Pay Button -->
+                        <button type="button" id="simple-pay-btn" class="btn btn-primary btn-lg w-100">
+                            Pay ₹{{ total }}
+                        </button>
+                        
+                        <!-- Fallback COD Button -->
+                        <button type="button" id="cod-btn" class="btn btn-secondary btn-lg w-100 mt-2">
+                            Place COD Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    {% for item in items %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ item.product.name }} x {{ item.quantity }}</span>
+                        <span>₹{{ item.subtotal }}</span>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total</span>
+                        <span>₹{{ total }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Razorpay -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const payBtn = document.getElementById('simple-pay-btn');
+    const codBtn = document.getElementById('cod-btn');
+    
+    // Online Payment Button
+    payBtn.addEventListener('click', function() {
+        console.log('Pay button clicked');
+        
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        
+        if (!name || !phone || !address) {
+            alert('Please fill all details');
+            return;
+        }
+        
+        // Check if Razorpay is available
+        const razorpayKey = '{{ razorpay_key|default:"" }}';
+        const razorpayOrderId = '{{ razorpay_order_id|default:"" }}';
+        const totalAmount = parseFloat('{{ total|default:0 }}');
+        
+        console.log('Razorpay Key:', razorpayKey);
+        console.log('Razorpay Order ID:', razorpayOrderId);
+        console.log('Total Amount:', totalAmount);
+        
+        if (!razorpayKey || !razorpayOrderId || totalAmount <= 0) {
+            alert('Online payment not available. Please use COD.');
+            return;
+        }
+        
+        // Simple Razorpay options
+        const options = {
+            key: razorpayKey,
+            amount: Math.round(totalAmount * 100), // paise
+            currency: 'INR',
+            name: 'Your Store',
+            description: 'Order Payment',
+            order_id: razorpayOrderId,
+            handler: function(response) {
+                console.log('Payment successful:', response);
+                alert('Payment Successful! Payment ID: ' + response.razorpay_payment_id);
+                // Redirect to success page
+                window.location.href = "{% url 'payment_success' %}?payment_id=" + response.razorpay_payment_id;
+            },
+            prefill: {
+                name: name,
+                contact: phone,
+                email: '{{ user.email|default:"customer@example.com" }}'
+            },
+            theme: {
+                color: '#3399cc'
+            }
+        };
+        
+        try {
+            console.log('Opening Razorpay...');
+            const rzp = new Razorpay(options);
+            rzp.open();
+        } catch (error) {
+            console.error('Razorpay Error:', error);
+            alert('Error: ' + error.message);
+        }
+    });
+    
+    // COD Button
+    codBtn.addEventListener('click', function() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        
+        if (!name || !phone || !address) {
+            alert('Please fill all details');
+            return;
+        }
+        
+        // Submit COD order via AJAX
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('phone', phone);
+        formData.append('address', address);
+        formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+        
+        fetch("{% url 'place_order_cod' %}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            if (data && data.success) {
+                window.location.href = "{% url 'payment_success' %}";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error placing order');
+        });
+    });
+});
+</script>
+{% endblock %}

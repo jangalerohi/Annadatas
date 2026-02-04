@@ -1,0 +1,158 @@
+{% include 'navbar.html' %}
+{% load static %}
+
+<style>
+
+/* Cart Card */
+.cart-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+/* Product Image */
+.cart-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Product Text */
+.cart-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #226629;
+}
+
+.cart-weight {
+    color: #555;
+}
+
+/* Price Section */
+.price-box {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f8c2f;
+}
+
+/* Quantity Controls */
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.qty-btn:hover {
+    background: #e2e2e2;
+}
+
+.qty-display {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Total box */
+.total-box {
+    background: #e8f5e9;
+    border-left: 5px solid #0f8c2f;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Checkout Button */
+.checkout-btn {
+    background: #0f8c2f;
+    font-size: 18px;
+    padding: 12px 28px;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.checkout-btn:hover {
+    background: #0a5f20;
+}
+</style>
+
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">🛒 Your Cart</h2>
+
+    {% if items %}
+        {% for item in items %}
+        <div class="cart-card row align-items-center">
+
+            <!-- Image -->
+            <div class="col-md-2 col-4 text-center">
+                <img src="{{ item.product.image.url }}" class="cart-img">
+            </div>
+
+            <!-- Name + Weight -->
+            <div class="col-md-4 col-8">
+                <p class="cart-title">{{ item.product.title }}</p>
+                <p class="cart-weight">{{ item.product.weight }}</p>
+            </div>
+
+            <!-- Quantity Controls -->
+            <div class="col-md-3 col-6 mt-3 mt-md-0">
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="updateQty('{{ item.product.id }}', 'minus')">−</button>
+                    <span class="qty-display" id="qty-{{ item.product.id }}">{{ item.quantity }}</span>
+                    <button class="qty-btn" onclick="updateQty('{{ item.product.id }}', 'plus')">+</button>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="col-md-3 col-6 text-end price-box mt-3 mt-md-0">
+                ₹{{ item.subtotal }}
+            </div>
+
+        </div>
+        {% endfor %}
+
+        <!-- Total -->
+        <div class="total-box mt-4">
+            <h4>Total Amount: ₹{{ total }}</h4>
+        </div>
+
+        <!-- Checkout -->
+        <div class="text-end mt-4">
+            <a href="/checkout" class="checkout-btn">Proceed to Checkout →</a>
+        </div>
+
+    {% else %}
+        <div class="alert alert-warning">Your cart is empty.</div>
+    {% endif %}
+</div>
+<br><br>
+
+{% include 'footer.html' %}
+
+<script>
+function updateQty(productId, action) {
+    fetch(`/update_cart/${productId}/${action}/`)
+    .then(response => response.json())
+    .then(data => {
+        // Reload page after update
+        location.reload();
+    });
+}
+</script>

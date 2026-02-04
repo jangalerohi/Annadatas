@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-check-circle"></i> Payment Successful!</h3>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle fa-5x text-success"></i>
+                    </div>
+                    
+                    <h4>Thank You for Your Payment!</h4>
+                    <p class="lead">Your order has been placed successfully.</p>
+                    
+                    {% if order %}
+                    <div class="alert alert-info text-start mt-4">
+                        <h5>Order Details</h5>
+                        <hr>
+                        <p><strong>Order ID:</strong> #{{ order.id }}</p>
+                        <p><strong>Name:</strong> {{ order.name }}</p>
+                        <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+                        <p><strong>Payment Status:</strong> 
+                            <span class="badge bg-success">Paid</span>
+                        </p>
+                        <p><strong>Order Status:</strong> 
+                            <span class="badge bg-info">{{ order.get_status_display }}</span>
+                        </p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'my_orders' %}" class="btn btn-primary">
+                            <i class="fas fa-list"></i> View My Orders
+                        </a>
+                        {% if order %}
+                        <a href="{% url 'track_order' order.id %}" class="btn btn-info">
+                            <i class="fas fa-truck"></i> Track Order
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'products' %}" class="btn btn-success">
+                            <i class="fas fa-shopping-cart"></i> Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

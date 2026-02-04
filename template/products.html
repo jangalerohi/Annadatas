@@ -1,0 +1,54 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products – Annadata</title>
+</head>
+
+<body>
+{% load static %}
+
+<section class="hero">
+    <img class="hero-bg" src="/static/img/products_bg_img.jpg" alt="Hero Image">
+
+    <div class="hero-content">
+        <h1>अन्नदाता – शेतातून थेट उत्पादने</h1>
+        <p>स्वच्छ, शुद्ध आणि आरोग्यदायी अशी शेतीची खरी चव अनुभवायला मिळवा.</p>
+    </div>
+</section>
+
+<br><br>
+
+<div class="products-list">
+
+    {% for product in products %}
+    <div class="product-item">
+         
+        <img src="{{ product.image.url }}" class="product-img">
+
+        <div class="product-content">
+            <h3 class="product-name">{{ product.title }}</h3>
+            <p class="product-size">{{ product.weight }}</p>
+            <p class="product-cost">₹{{ product.price }}</p>
+
+            <a href="{% url 'add_to_cart' product.slug %}" class="btn btn-primary">Add to Cart</a>
+
+
+            <!-- CLEAN URL (WORKS PERFECTLY) -->
+            <a href="{% url 'product_details' product.slug %}" class="btn btn-outline">
+                View Details
+            </a>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+<br><br>
+{% include 'footer.html' %}
+
+</body>
+</html>
