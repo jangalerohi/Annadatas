@@ -123,3 +123,4 @@ STATICFILES_DIRS = [
 
 RAZORPAY_KEY_ID = 'rzp_test_SBek0v97N5TWt8'
 RAZORPAY_KEY_SECRET = 'gk0ZHMcJEbczyuhqaGKPFUJG'
+ALLOWED_HOSTS = ['annadatas-2.onrender.com', '.onrender.com']
